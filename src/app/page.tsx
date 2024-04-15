@@ -12,10 +12,9 @@ export default function Home() {
           Grab the ultimate sale on bid
         </h1>
         <div>
-        <Button className="text-xl" asChild>
-          <Link href="/">Explore Market Place</Link>
-        </Button>
-            
+          <Button className="text-xl" asChild>
+            <Link href="/market/explore">Explore Market Place</Link>
+          </Button>
         </div>
       </div>
     </main>
