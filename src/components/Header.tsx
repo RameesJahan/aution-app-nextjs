@@ -28,12 +28,14 @@ const Header = (props: Props) => {
             </PopoverTrigger>
             <PopoverContent>
               <div className="flex flex-col gap-2">
-                <Button variant="outline" asChild>
-                  <Link href="/">Create Bid</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/">Join Bid</Link>
-                </Button>
+                <div className="*:w-full gap-2 flex">
+                  <Button variant="outline" asChild>
+                    <Link href="/">Create Bid</Link>
+                  </Button>
+                  <Button asChild>
+                    <Link href="/">Join Bid</Link>
+                  </Button>
+                </div>
                 <Button variant="destructive">Log Out</Button>
               </div>
             </PopoverContent>

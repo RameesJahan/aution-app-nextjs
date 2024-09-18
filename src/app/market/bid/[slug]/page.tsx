@@ -1,30 +1,38 @@
-import React from "react";
+"use client"
 import { bids, bid_items } from "@/data/data";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import SellerCard from "@/components/SellerCard";
 import BidItemView from "@/components/BidItemView";
+import PriceControl from "@/components/PriceControl";
 
-type ExploreBidProps = {
+type ViewBidProps = {
   params: { slug: string };
 };
 
-const ExploreBid = ({ params }: ExploreBidProps) => {
+const ViewBid = ({ params }: ViewBidProps) => {
   const bidId = Number(params.slug);
   const bid = bids.find((bid) => bid.bid_id === bidId);
   if (!bid) {
     return <div className="w-full h-full text-center">Bid not found</div>;
   }
+
   const bidItem = bid_items.find((item) => item.item_id === bid.bid_item);
   if (!bidItem) {
     return <div>Something Went Wrong!</div>;
   }
 
+  function handleOnChange(value: number) {
+    console.log(value);
+  }
+
   return (
     <div className="w-full max-w-screen-sm p-4 relative space-y-4">
-      
-      <BidItemView image={bidItem.image} name={bidItem.name} price={bidItem.price} />
+      <BidItemView
+        image={bidItem.image}
+        name={bidItem.name}
+        price={bidItem.price}
+      />
       <Card className="sticky bottom-1 p-6">
         <div className="w-full h-full flex justify-between items-center text-sm">
           <div>
@@ -34,9 +42,12 @@ const ExploreBid = ({ params }: ExploreBidProps) => {
             </p>
           </div>
           <div>
-            <Button asChild>
-              <Link href={`/market/bid/${bidId}`}>Join Bid</Link>
-            </Button>
+            <div className="flex flex-col gap-2">
+              <PriceControl onChange={handleOnChange} />
+              <Button>
+                  Place Bid
+              </Button>
+            </div>
           </div>
         </div>
       </Card>
@@ -44,7 +55,7 @@ const ExploreBid = ({ params }: ExploreBidProps) => {
         <h2 className="text-xl">Description</h2>
         <p className="text-sm text-muted-foreground">{bidItem.features}</p>
       </div>
-      
+
       <div>
         <h2 className="text-xl">Seller</h2>
         <div className="mt-2">
@@ -55,4 +66,4 @@ const ExploreBid = ({ params }: ExploreBidProps) => {
   );
 };
 
-export default ExploreBid;
+export default ViewBid;

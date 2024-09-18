@@ -11,6 +11,7 @@ import {
 import Image from "next/image";
 import {bid_items} from '@/data/data'
 import Link from "next/link";
+import { StarIcon } from "@radix-ui/react-icons";
 
 type BidCardProps = {
   bid: Bid;
@@ -38,7 +39,12 @@ const BidCard = ({ bid }: BidCardProps) => {
   if(!bid_item) return <div>Something went wrong!</div>
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden relative">
+      <div className="absolute right-2 top-2 z-10">
+        <Button size="icon" className="h-10 w-10" variant="outline">
+          <StarIcon className="h-6 w-6" />
+        </Button>
+      </div>
       <CardHeader className="p-0">
         <div className="relative w-full aspect-video">
           <Image
@@ -54,11 +60,11 @@ const BidCard = ({ bid }: BidCardProps) => {
         {/* <CardDescription>
           {bid_item.features}
         </CardDescription> */}
-        <p>₹{bid_item.price}</p>
+        <p className="text-muted-foreground">₹{bid_item.price}</p>
       </CardContent>
       <CardFooter>
         <div className="w-full flex justify-between items-center">
-          <p>₹{bid_item.price+(bid_item.price*0.3)}</p>
+          <p className="text-green-500">₹{bid_item.price+(bid_item.price*0.3)}</p>
           <Button asChild>
             <Link href={'/market/explore/'+bid.bid_id}>
               View Bid
